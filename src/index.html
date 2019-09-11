@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>TUNER</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="TUNER" content="1アクションで使えるチューナー。
+        ボタンを押すと「A4(ラ)」（442Hz）の音を10秒出して、止まります。弦楽器、木管の調弦にご活用ください。" />
+        <!-- BootstrapのCSS読み込み -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- jQuery読み込み -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- BootstrapのJS読み込み -->
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron">
+        <div class="text-center">
+            <h1>TUNER 442Hz</h1>
+            <script src=..\node_modules\tone\build\Tone.js></script>
+            <section>
+                <button id="btn" type="button" class="btn btn-primary btn-lg">SOUND</button>
+            </section>
+            <script>
+                var synth;
+                btn.addEventListener('click', function() {
+                synth = new Tone.Synth({
+                    // 発振器の設定
+                    oscillator:{
+                        type:"triangle8"                    
+                    },  
+                    // エンベロープ(包絡線)の設定
+                    envelope:{
+                        attack:0.005,  // 最大音量アタック・レベル(Attack Level)に達する時間
+                        decay:0.03,     // 一定音量まで減衰(Decay)する時間
+                        sustain:0.5,   // 一定振幅(Sustain Level)が続く時間
+                        release:20     // 音が消えるまでの時間
+                    }
+                }).toMaster();
+                synth.triggerAttackRelease(442, '2n');
+                })
+            </script>
+        </div>
+        </div>
+    </body>
+</html>
